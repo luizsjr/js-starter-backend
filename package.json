@@ -1,0 +1,26 @@
+{
+  "name": "js-starter-backend",
+  "version": "1.0.0",
+  "description": "JS Starter Backend Project",
+  "main": "src/app.js",
+  "repository": "git@github.com:luizsjr/js-starter-backend.git",
+  "author": "luizsjr",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "security-check": "nsp check",
+    "prestart": "npm-run-all --parallel security-check",
+    "start": "babel-node ./src/app"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "npm-run-all": "^4.1.2",
+    "nsp": "^3.2.1"
+  }
+}
