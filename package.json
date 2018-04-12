@@ -9,8 +9,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "security-check": "nsp check",
-    "prestart": "npm-run-all --parallel security-check",
-    "start": "babel-node ./src/app"
+    "lint": "esw src --color",
+    "lint:watch": "npm run lint -- --watch",
+    "serve": "babel-node ./src/app",
+    "serve:watch": "nodemon --watch src --exec npm run serve",
+    "start": "npm-run-all --parallel security-check lint:watch serve:watch"
   },
   "dependencies": {
     "express": "^4.16.3"
@@ -18,8 +21,13 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-watch": "^3.1.4",
+    "nodemon": "^1.17.3",
     "npm-run-all": "^4.1.2",
     "nsp": "^3.2.1"
   }
