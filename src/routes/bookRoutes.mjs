@@ -1,4 +1,4 @@
-import books from './books';
+import books from '../data/books';
 import express from 'express';
 
 const bookRouter = express.Router();
