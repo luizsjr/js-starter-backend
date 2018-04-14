@@ -8,9 +8,9 @@ bookRouter.route('/')
     res.send(books);
   });
 
-bookRouter.route('/single')
+bookRouter.route('/:id')
   .get((req, res) => {
-    res.send('Hello Single Books!');
+    res.send(books[req.params.id]);
   });
 
 export default bookRouter;
