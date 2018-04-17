@@ -1,16 +1,26 @@
-import books from '../data/books';
 import express from 'express';
+import mongodb from 'mongodb';
 
-const bookRouter = express.Router();
+function getBookRouter(db) {
+  const collection = db.collection('books');
 
-bookRouter.route('/')
-  .get((req, res) => {
-    res.send(books);
+  const bookRouter = express.Router();
+  bookRouter.route('/').get((req, res) => {
+    collection.find({}).toArray((err, docs) => {
+      if (err) {
+        res.error(err);
+      } else {
+        res.json(docs);
+      }
+    });
   });
 
-bookRouter.route('/:id')
-  .get((req, res) => {
-    res.send(books[req.params.id]);
+  bookRouter.route('/:id').get((req, res) => {
+    collection.findOne({_id:new mongodb.ObjectID(req.params.id)}).then( doc => {
+      res.send(doc);
+    });
   });
+  return bookRouter;
+}
 
-export default bookRouter;
+export default getBookRouter;

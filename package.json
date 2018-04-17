@@ -10,13 +10,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "security-check": "nsp check",
     "lint": "esw src --color",
-    "lint:watch": "npm run lint -- --watch",
     "serve": "node --experimental-modules ./src/app.mjs",
-    "serve:watch": "nodemon --watch src --exec npm run serve",
-    "start": "npm-run-all --parallel security-check lint:watch serve:watch"
+    "serve:watch": "nodemon --watch src --exec npm run re-start",
+    "re-start": "npm-run-all --parallel lint serve",
+    "start": "npm-run-all --parallel security-check serve:watch"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "mongodb": "^3.0.6"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

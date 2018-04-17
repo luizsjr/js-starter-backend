@@ -1,5 +1,7 @@
 import express from 'express';
-import bookRouter from './routes/bookRoutes';
+import getBookRouter from './routes/bookRoutes';
+import getAdminRouter from './routes/adminRoutes';
+import initDatabases from './dbs/mongodb';
 
 // process.env.NODE_ENV = 'development';
 
@@ -20,7 +22,14 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.use('/books', bookRouter);
+//Connect to the DB and start the Routes
+initDatabases().then(db => {
+  const bookRouter = getBookRouter(db);
+  const adminRouter = getAdminRouter(db);
+  app.use('/books', bookRouter);
+  app.use('/admin', adminRouter);
+});
+
 
 /* eslint-disable no-console */
 app.listen(port, (err) => {
